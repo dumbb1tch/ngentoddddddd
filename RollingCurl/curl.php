@@ -1,16 +1,16 @@
-class curl {
-	var $ch, $agent, $error, $info, $cookiefile, $savecookie;	
-	function curl() {
-		$this->agent = $this->get_agent(rand(0,44));
-		$this->ch = curl_init();
-		curl_setopt ($this->ch, CURLOPT_USERAGENT, $this->agent);
-		curl_setopt ($this->ch, CURLOPT_RETURNTRANSFER, 1);
-		curl_setopt ($this->ch, CURLOPT_SSL_VERIFYPEER, 0);
-//	curl_setopt ($this->ch, CURLOPT_SSL_VERIFYHOST, 1);
-		curl_setopt ($this->ch, CURLOPT_FOLLOWLOCATION,true);
-		curl_setopt ($this->ch, CURLOPT_TIMEOUT, 20);
-		curl_setopt ($this->ch, CURLOPT_CONNECTTIMEOUT,20);
-		}
+class CustomCurl {
+    var $ch, $agent, $error, $info, $cookiefile, $savecookie;  
+
+    function __construct() {
+        $this->agent = $this->generateUserAgent(rand(0,44));
+        $this->ch = curl_init();
+        curl_setopt ($this->ch, CURLOPT_USERAGENT, $this->agent);
+        curl_setopt ($this->ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt ($this->ch, CURLOPT_SSL_VERIFYPEER, 0);
+        curl_setopt ($this->ch, CURLOPT_FOLLOWLOCATION,true);
+        curl_setopt ($this->ch, CURLOPT_TIMEOUT, 20);
+        curl_setopt ($this->ch, CURLOPT_CONNECTTIMEOUT,20);
+    }
 	function http_code() {
     	return curl_getinfo($this->ch, CURLINFO_HTTP_CODE);
   	}
